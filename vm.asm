@@ -13,9 +13,14 @@ vmContinueHandler: .word 0
 
 .globl _enterVM
 _enterVM:
-	push lr
-	cmp vmContinueHandler, 0
-	bleq initVM
+	bl _loadVM
+	/*ldr lr, cCodeLR FIXME*/
 	bl vmContinueHandler
-	pop lr
+.globl _initVM
+_initVM:
+	b resetVM
+_resetVM:
+	mov pc, lr
+_exitVM:
+	/*ldr lr, cCodeLR FIXME */
 	mov pc, lr
