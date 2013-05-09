@@ -5,6 +5,7 @@
 #include "vmInterface.h"
 
 typedef unsigned int (*intReturnsUint)(int);
+intReturnsUint func=NULL;
 
 int main(){
     unsigned int codeBytes = 0xFFFF<<4;
@@ -15,7 +16,7 @@ int main(){
     tempCode[0]=0xe2800028;
     tempCode[1]=0xe1a0f00e;
 
-    intReturnsUint func=(intReturnsUint)virtualCodeAddress;
+    func=(intReturnsUint)virtualCodeAddress;
     unsigned int i=func(2);
     printf("%d", i);
 }
